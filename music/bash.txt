@@ -1,0 +1,1 @@
+for %a in (*) do ffprobe -v quiet -print_format compact=print_section=0:nokey=1:escape=csv -show_entries format=duration "%a"

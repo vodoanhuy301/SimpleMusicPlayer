@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SimpleMusicPlayer</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./fontawesome-free-5.15.4-web/css/all.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="music-player-container">
+      <div class="music-player__header">
+        <div class="header-img"></div>
+        <div class="header-info-container">
+          <h1 class="header-title">Nhạc của tui</h1>
+          <span class="header-info"></span>
+        </div>
+      </div>
+      <div class="music-player">
+        <div class="music-player__playing">
+          <h2 class="playing-title">Bài hát đang chơi</h2>
+          <span class="playing-singer">Ca sĩ</span>
+        </div>
+        <div class="controller-left">
+          <div class="player-timeline-container">
+            <div class="player-timeline" id="current-time">00:00</div>
+            <progress id="timeline" value="0" max="100"></progress>
+            <div class="player-timeline" id="duration">00:00</div>
+          </div>
+          <div class="icon-container">
+            <i class="fas fa-random first-icon"></i>
+            <i class="fas fa-step-backward controller-icon"id="pre-icon"></i>
+            <i class="fas fa-play-circle controller-icon play-icon"></i>
+            <i class="fas fa-step-forward controller-icon " id="next-icon"></i>
+            <i class="fas fa-redo last-icon"></i>
+          </div>
+        </div>
+        <div class="controller-right">
+          <i class="fas fa-volume-up controller-icon-right" id="vol-icon"></i>
+          <input type="range" id="vol" name="vol" min="0" max="100">
+        </div>
+      </div>
+      <ul class="music-player__list">
+        <li class="music-player__song">
+          <h4 class="song-title">Song</h4>
+          <span class="song-singer">Singer</span>
+          <span class="song-duration">Duration</span>
+        </li>
+        <!-- <li class="music-player__song">
+          <h4 class="song-title">Crying Over You</h4>
+          <span class="song-singer">Justatee ft Binz</span>
+          <span class="song-duration">5:39</span>
+          <audio id="song1" src="./music/Crying Over You - JustaTee_ Binz.mp3"></audio>
+        </li> -->
+      </ul>
+    </div>
+  </div>
+  <script src="./script.js"></script>
+</body>
+
+</html>
