@@ -1,20 +1,20 @@
-var myTitlePlayer = document.querySelector(".playing-title");
-var myPlaylistInfo = document.querySelector(".header-info");
-var mySinger = document.querySelector(".playing-singer");
-var myPlayButton = document.querySelector(".play-icon");
-var myShuffleButton = document.querySelector(".first-icon");
-var myLoopButton = document.querySelector(".last-icon");
-var mySongTitle = document.querySelectorAll(".music-player__song")[1];
-var list = document.querySelector("music-player__list");
-var vol = document.querySelector("#vol");
-var volIcon = document.querySelector("#vol-icon");
-var currTime = document.querySelector("#current-time");
-var durationTime = document.querySelector("#duration");
-var timeLine = document.querySelector("#timeline");
-var list = document.querySelector(".music-player__list");
-var playIcon = document.querySelector(".play-icon");
-var nextIcon = document.querySelector("#next-icon");
-var preIcon = document.querySelector("#pre-icon");
+var myTitlePlayer = $(".playing-title");
+var myPlaylistInfo = $(".header-info");
+var mySinger = $(".playing-singer");
+var myPlayButton = $(".play-icon");
+var myShuffleButton = $(".first-icon");
+var myLoopButton = $(".last-icon");
+var mySongTitle = $(".music-player__song")[1];
+var list = $("music-player__list");
+var vol = $("#vol");
+var volIcon = $("#vol-icon");
+var currTime = $("#current-time");
+var durationTime = $("#duration");
+var timeLine = $("#timeline");
+var list = $(".music-player__list");
+var playIcon = $(".play-icon");
+var nextIcon = $("#next-icon");
+var preIcon = $("#pre-icon");
 var widthScroll = 0;
 var currentSong = document.createElement("audio");
 var isPaused = false;
@@ -63,20 +63,20 @@ function loadMusic() {
       indexSong = index;
       setSong(song.name, song.singer, song.duration);
     });
-    list.appendChild(x);
+    list.append(x);
   });
 }
 loadMusic();
-myPlaylistInfo.innerHTML = "vodoanhuy301 - total " + myList.length + " songs";
+myPlaylistInfo.html("vodoanhuy301 - total " + myList.length + " songs");
 function setSong(name, singer, duration) {
-  myTitlePlayer.innerHTML = name;
-  mySinger.innerHTML = singer;
-  durationTime.innerHTML = duration;
-  timeLine.setAttribute("max", changeTime(duration));
+  myTitlePlayer.html(name);
+  mySinger.html(singer);
+  durationTime.html(duration);
+  timeLine.attr("max", changeTime(duration));
 }
-function playASong(name,singer, duration,index) {
-  currentSong.setAttribute("src",myList[index].path);
-  setSong(name,singer,duration);
+function playASong(name, singer, duration, index) {
+  currentSong.setAttribute("src", myList[index].path);
+  setSong(name, singer, duration);
   currentSong.play();
 }
 function formatTime(t) {
@@ -101,33 +101,36 @@ function changeTime(duration) {
   return tmp[0] * 60 + Number(tmp[1]);
 }
 setInterval(function () {
-  if (currentSong.getAttribute("src") && currentSong.currentTime < currentSong.duration) {
+  if (
+    currentSong.getAttribute("src") &&
+    currentSong.currentTime < currentSong.duration
+  ) {
     changeTimeline(currentSong.currentTime);
-  } else if (currentSong.getAttribute("src")&& currentSong.currentTime == currentSong.duration) nextSong();
+  } else if (currentSong.getAttribute("src") && currentSong.currentTime == currentSong.duration) nextSong();
 }, 900);
 function changeTimeline(currentTime) {
-  currTime.innerHTML = formatTime(currentTime);
+  currTime.html(formatTime(currentTime));
   timeLine.value = currentTime.toFixed(0);
 }
 
-vol.addEventListener("change", function () {
-  currentSong.volume = vol.value / 100;
+vol.on("change", function () {
+  currentSong.volume = vol.val() / 100;
 });
-volIcon.addEventListener("click", function () {
+volIcon.click(function () {
   muteVolume();
 });
 
 function muteVolume() {
-  if (volIcon.classList.value.includes("fa-volume-up")) {
-    volIcon.classList.remove("fa-volume-up");
-    volIcon.classList.add("fa-volume-mute");
+  if (volIcon.hasClass("fa-volume-up")) {
+    volIcon.removeClass("fa-volume-up");
+    volIcon.addClass("fa-volume-mute");
     currentSong.volume = 0;
-    vol.value = 0;
+    vol.val(0);
   } else {
-    volIcon.classList.remove("fa-volume-mute");
-    volIcon.classList.add("fa-volume-up");
+    volIcon.removeClass("fa-volume-mute");
+    volIcon.addClass("fa-volume-up");
     currentSong.volume = 0.5;
-    vol.value = 50;
+    vol.val(50);
   }
 }
 function nextSong() {
@@ -173,46 +176,44 @@ function preSong() {
   }
 }
 function playSong() {
-  myPlayButton.classList.remove("fa-play-circle");
-  myPlayButton.classList.add("fa-pause-circle");
+  myPlayButton.removeClass("fa-play-circle");
+  myPlayButton.addClass("fa-pause-circle");
 }
-myPlayButton.addEventListener("click", function () {
-  if (myPlayButton.classList.value.includes("fa-pause-circle")) {
-    myPlayButton.classList.remove("fa-pause-circle");
-    myPlayButton.classList.add("fa-play-circle");
+myPlayButton.click(function () {
+  console.log(myPlayButton.attr("class"));
+  if (myPlayButton.hasClass("fa-pause-circle")) {
+    myPlayButton.removeClass("fa-pause-circle");
+    myPlayButton.addClass("fa-play-circle");
     currentSong.pause();
-  } else if (myPlayButton.classList.value.includes("fa-play-circle")) {
-    myPlayButton.classList.remove("fa-play-circle");
-    myPlayButton.classList.add("fa-pause-circle");
+  } else if (myPlayButton.hasClass("fa-play-circle")) {
+    myPlayButton.removeClass("fa-play-circle");
+    myPlayButton.addClass("fa-pause-circle");
     currentSong.play();
   }
 });
-nextIcon.addEventListener("click", function () {
+nextIcon.click(function () {
   nextSong();
 });
-preIcon.addEventListener("click", function () {
+preIcon.click(function () {
   preSong();
 });
-myShuffleButton.addEventListener("click", function () {
-  if (
-    myShuffleButton.classList[myShuffleButton.classList.length - 1] ==
-    "first-icon"
-  ) {
-    myShuffleButton.classList.remove("first-icon");
-    myShuffleButton.classList.add("first-icon--pressed");
+myShuffleButton.click(function () {
+  if (myShuffleButton.hasClass("first-icon")) {
+    myShuffleButton.removeClass("first-icon");
+    myShuffleButton.addClass("first-icon--pressed");
   } else {
-    myShuffleButton.classList.remove("first-icon--pressed");
-    myShuffleButton.classList.add("first-icon");
+    myShuffleButton.removeClass("first-icon--pressed");
+    myShuffleButton.addClass("first-icon");
   }
 });
-myLoopButton.addEventListener("click", function () {
+myLoopButton.click(function () {
   if (
-    myLoopButton.classList[myLoopButton.classList.length - 1] == "last-icon"
+    myLoopButton.hasClass("last-icon")
   ) {
-    myLoopButton.classList.remove("last-icon");
-    myLoopButton.classList.add("last-icon--pressed");
+    myLoopButton.removeClass("last-icon");
+    myLoopButton.addClass("last-icon--pressed");
   } else {
-    myLoopButton.classList.remove("last-icon--pressed");
-    myLoopButton.classList.add("last-icon");
+    myLoopButton.removeClass("last-icon--pressed");
+    myLoopButton.addClass("last-icon");
   }
 });
